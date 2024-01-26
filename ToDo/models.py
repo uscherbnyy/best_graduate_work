@@ -1,3 +1,53 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField(unique=True)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профили"
+
+
+class Task(models.Model):
+    id = models.AutoField(primary_key=True)
+    created_by = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='created_tasks')
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    status = models.IntegerField()    # Это поле зависит от типа статуса
+    completed = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    completed_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted = models.BooleanField(default=False)
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True)
+    priority = models.ForeignKey('Priority', on_delete=models.SET_NULL, null=True, blank=True)
+
+
+class Category(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted = models.BooleanField(default=False)
+
+
+class Priority(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    deleted = models.BooleanField(default=False)
+
+
