@@ -1,6 +1,9 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 
+from ToDo.forms import TaskForm
+from ToDo.models import Task
+
 
 # Create your views here.
 
@@ -77,3 +80,36 @@ def destroy(self, request):
 
 def update(request):
     pass
+
+
+def create_task(request):
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = TaskForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'create_task.html', context)
+
+
+def task_list(request):
+    user_id = request.user_id
+    tasks = Task.objects.filter(created_by=user_id)
+    context = {
+        'tasks': tasks,
+    }
+    return render(request, 'task_list.html', context)
+
+
+def sort_status(request):
+    user_id = request.user_id
+    tasks = Task.objects.filter(created_by=user_id)
+    status = tasks.objects.filter(Task.status)
+    context = {
+        'status': status,
+    }
+    return render(request, 'sort_status.html', context)

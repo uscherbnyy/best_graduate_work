@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for task in status %}
+  <div>
+    <h3>{{ status.as_p}}</h3>
+    <p>{{ status.description }}</p>
+    <p>Дата завершения: {{ status.due_date }}</p>
+  </div>
+{% endfor %}
+</body>
+</html>

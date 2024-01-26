@@ -25,4 +25,7 @@ urlpatterns = [
     path('user_detail/<int:user_id>/', views.user_detail, name='user_detail'),
     path('update/', views.update),
     path('destroy/', views.destroy),
+    path('create_task/', views.create_task),
+    path('task_list/', views.task_list),
+    path('sort_status/', views.sort_status),
 ]
