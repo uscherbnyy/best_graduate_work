@@ -20,5 +20,9 @@ from ToDo import views
 
 urlpatterns = [
     path('', views.home),
-
+    path('listusers/', views.listusers),
+    path('user_selection/', views.user_selection),
+    path('user_detail/<int:user_id>/', views.user_detail, name='user_detail'),
+    path('update/', views.update),
+    path('destroy/', views.destroy),
 ]
