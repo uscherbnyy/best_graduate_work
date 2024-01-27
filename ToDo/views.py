@@ -96,8 +96,7 @@ def create_task(request):
     return render(request, 'create_task.html', context)
 
 
-def task_list(request):
-    user_id = request.user_id
+def task_list(request, user_id):
     tasks = Task.objects.filter(created_by=user_id)
     context = {
         'tasks': tasks,
@@ -105,10 +104,8 @@ def task_list(request):
     return render(request, 'task_list.html', context)
 
 
-def sort_status(request):
-    user_id = request.user_id
-    tasks = Task.objects.filter(created_by=user_id)
-    status = tasks.objects.filter(Task.status)
+def sort_status(request, status):
+    status = Task.objects.filter(status=status)
     context = {
         'status': status,
     }

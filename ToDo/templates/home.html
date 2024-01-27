@@ -16,10 +16,18 @@
 <a href="accounts/logout"> Выход из системы</a><br>
 <a href="accounts/ password/change/">Сменить пароль</a><br>
 <a href="accounts/ password/reset/">Сбросить пароль</a><br>
+
 <h>2)	Задача</h><br>
 <a href="create_task/">Создать задачу</a><br>
-<a href="task_list/">Получить все задачи для пользователя</a><br>
-<a href="sort_status/">Получить все задачи по статусу</a><br>
+<a href="{% url 'task_list' user.id %}">Получить все задачи для пользователя</a><br>
+<a href="{% url 'sort_status '/">Получить все задачи по статусу</a><br>
+<form method="GET" action="{% url 'sort_status' %}">
+    <select name="status">
+        {% for status in status %}
+            <option value="i">{% status %}</option>
+    </select>
+    <input type="submit" value="Выбрать">
+</form>
 <a href="accounts/login/">Получить все задачи по категориям</a><br>
 <a href="accounts/login/">Получить все задачи по приоритету</a><br>
 <a href="accounts/login/">Получить задачу пользователя по идентификатору</a><br>

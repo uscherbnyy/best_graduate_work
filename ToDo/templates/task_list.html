@@ -7,9 +7,9 @@
 <body>
 {% for task in tasks %}
   <div>
-    <h3>{{ task.as_p}}</h3>
+    <h3>{{ task.title}}</h3>
     <p>{{ task.description }}</p>
-    <p>Дата завершения: {{ task.due_date }}</p>
+    <p>{{ task.category }}</p>
   </div>
 {% endfor %}
 </body>

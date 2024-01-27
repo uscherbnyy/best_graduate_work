@@ -7,9 +7,10 @@
 <body>
 {% for task in status %}
   <div>
-    <h3>{{ status.as_p}}</h3>
+    <h3>{{ status.}}</h3>
     <p>{{ status.description }}</p>
     <p>Дата завершения: {{ status.due_date }}</p>
+    <p>Дата завершения: {{ status.category }}</p>
   </div>
 {% endfor %}
 </body>
